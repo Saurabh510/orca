@@ -11,6 +11,7 @@ export function DeleteWorktreeDialogFooter({
   isMainWorktree,
   isDeleting,
   isDetachingChildren = false,
+  deleteDisabled = false,
   canForceDelete,
   isBatchDelete,
   worktreeCount,
@@ -25,6 +26,7 @@ export function DeleteWorktreeDialogFooter({
   isMainWorktree: boolean
   isDeleting: boolean
   isDetachingChildren?: boolean
+  deleteDisabled?: boolean
   canForceDelete: boolean
   isBatchDelete: boolean
   worktreeCount: number
@@ -65,7 +67,7 @@ export function DeleteWorktreeDialogFooter({
         <WorktreeForceDeleteButton
           buttonRef={confirmButtonRef}
           size="default"
-          disabled={isDeleting}
+          disabled={isDeleting || deleteDisabled}
           onForceDelete={onForceDelete}
           onSavingChange={onSavingChange}
           onAlwaysForceDelete={() =>
@@ -80,7 +82,7 @@ export function DeleteWorktreeDialogFooter({
           ref={confirmButtonRef}
           variant="destructive"
           onClick={onDelete}
-          disabled={isDeleting}
+          disabled={isDeleting || deleteDisabled}
         >
           {isDeleting ? <LoaderCircle className="size-4 animate-spin" /> : <Trash2 />}
           {label}

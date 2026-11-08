@@ -356,7 +356,7 @@ const DeleteWorktreeDialog = React.memo(function DeleteWorktreeDialog() {
 
           <RemovalUnsavedFilesNotice targets={unsavedTargets} enabled={isOpen} />
 
-          {childWorkspaceCount > 0 && (
+          {(childWorkspaceCount > 0 || preserveChildren) && (
             <DeleteWorktreeLineageNotice
               descendants={lineageDelete.descendants}
               parent={worktree}
@@ -389,6 +389,7 @@ const DeleteWorktreeDialog = React.memo(function DeleteWorktreeDialog() {
             isMainWorktree={isMainWorktree}
             isDeleting={isDeleting || isSavingForcePreference}
             isDetachingChildren={isDetachingChildren}
+            deleteDisabled={preserveChildren && !canPreserveChildren}
             canForceDelete={canForceDelete}
             isBatchDelete={isBatchDelete}
             worktreeCount={worktrees.length}
