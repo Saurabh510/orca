@@ -39,7 +39,7 @@ describe('orchestration RPC methods', () => {
     it('replies to a message', async () => {
       setup()
       const original = db.insertMessage({
-        from: 'a',
+        from: `run:${activeRunId}`,
         to: 'b',
         subject: 'question',
         runId: activeRunId
@@ -53,7 +53,7 @@ describe('orchestration RPC methods', () => {
         message: { to_handle: string; subject: string; thread_id: string; run_id: string }
       }
 
-      expect(result.message.to_handle).toBe('a')
+      expect(result.message.to_handle).toBe(`run:${activeRunId}`)
       expect(result.message.subject).toBe('Re: question')
       expect(result.message.thread_id).toBe(original.id)
       expect(result.message.run_id).toBe(activeRunId)
