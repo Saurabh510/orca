@@ -4,7 +4,7 @@ import { z } from 'zod'
 import type { FederationRuntime } from '../federation-runtime'
 import type { FederatedLifecycleSettlement } from '../federation-lifecycle-settlement'
 import '../../../../../shared/protocol-version'
-import { ORCHESTRATION_FEDERATION_LIFECYCLE_SETTLEMENT_PROTOCOL_VERSION } from '../../../../../shared/orchestration-runtime-capabilities'
+import { ORCHESTRATION_FEDERATION_LIFECYCLE_SETTLEMENT_PROTOCOL_VERSION } from '../../../../../shared/orchestration/orchestration-runtime-capabilities'
 import { OrchestrationError } from '../../orchestration-error'
 import {
   acquireFederationAckLease,

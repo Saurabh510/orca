@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { OrcaRuntimeService } from '../../orca-runtime'
-import type { Automation } from '../../../../shared/automations-types'
+import type { Automation } from '../../../../shared/automations/automation-definition'
 import type { Repo } from '../../../../shared/repo-types'
 
 export function registerOrcaRuntimeAutomationsTests(): void {
