@@ -38,6 +38,7 @@ type SettingsSearchableSelectProps = {
   onValueChange: (value: string) => void
   searchPlaceholder: string
   emptyText?: string
+  disabled?: boolean
   onOpenChange?: (open: boolean) => void
   /** Non-selectable rows after the options, e.g. a loading indicator. */
   status?: React.ReactNode
@@ -46,13 +47,20 @@ type SettingsSearchableSelectProps = {
 }
 
 /** A searchable settings dropdown that matches the New Worktree dialog pickers. */
-export function SettingsSearchableSelect({
+export function SettingsSearchableSelect(props: SettingsSearchableSelectProps): React.JSX.Element {
+  return (
+    <SettingsSearchableSelectControl key={props.disabled ? 'disabled' : 'enabled'} {...props} />
+  )
+}
+
+function SettingsSearchableSelectControl({
   ariaLabel,
   value,
   groups,
   onValueChange,
   searchPlaceholder,
   emptyText,
+  disabled = false,
   onOpenChange,
   status,
   actions
@@ -88,12 +96,13 @@ export function SettingsSearchableSelect({
 
   const handleOpenChange = useCallback(
     (next: boolean) => {
-      setOpen(next)
+      const nextOpen = next && !disabled
+      setOpen(nextOpen)
       setQuery('')
       setCommandSelection({ value, selectedValue: value, query: '' })
-      onOpenChange?.(next)
+      onOpenChange?.(nextOpen)
     },
-    [onOpenChange, value]
+    [disabled, onOpenChange, value]
   )
 
   const close = (): void => handleOpenChange(false)
@@ -120,15 +129,16 @@ export function SettingsSearchableSelect({
   }
 
   return (
-    <Popover open={open} onOpenChange={handleOpenChange}>
+    <Popover open={open && !disabled} onOpenChange={handleOpenChange}>
       <PopoverTrigger asChild>
         <Button
           type="button"
           variant="outline"
           size="sm"
           role="combobox"
-          aria-expanded={open}
+          aria-expanded={open && !disabled}
           aria-label={ariaLabel}
+          disabled={disabled}
           onKeyDown={handleTriggerKeyDown}
           className="min-w-[220px] justify-between"
         >
@@ -160,7 +170,7 @@ export function SettingsSearchableSelect({
             setCommandSelection({ value: next, selectedValue: value, query })
           }
           className="min-h-0 flex-1"
-          label={ariaLabel}
+          label={searchPlaceholder}
         >
           <CommandInput
             ref={inputRef}
