@@ -9,6 +9,7 @@ import { buildPaletteFilterModel } from '../cmd-j/palette-filter-options'
 import { createGlobalSettingsFixture } from '../../../../shared/global-settings-test-fixture'
 import { makeCmdJTaskSearchResult } from '../cmd-j/task-search-results'
 import { useAppStore } from '@/store'
+import type { Repo } from '../../../../shared/repo-types'
 
 import type { GitHubWorkItem } from '../../../../shared/github/work-item-types'
 import { buildTaskSourceContextFromRepo } from '../../../../shared/work-items/task-source-context'
