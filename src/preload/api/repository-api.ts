@@ -5,6 +5,7 @@ import type {
   NestedRepoScanResult,
   ProjectGroup,
   ProjectGroupUpdate,
+  ProjectGroupMutation,
   ProjectGroupImportMode,
   ProjectGroupImportResult
 } from '../../shared/project-group-types'
@@ -129,6 +130,9 @@ export type ProjectGroupsApi = {
     createdFrom?: ProjectGroup['createdFrom']
   }) => Promise<ProjectGroup>
   update: (args: { groupId: string; updates: ProjectGroupUpdate }) => Promise<ProjectGroup | null>
+  updateMany: (args: {
+    mutations: readonly ProjectGroupMutation[]
+  }) => Promise<ProjectGroup[] | null>
   delete: (args: { groupId: string }) => Promise<boolean>
   moveProject: (args: {
     projectId: string
